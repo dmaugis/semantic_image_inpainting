@@ -97,6 +97,8 @@ def main():
     #imout = m.sample()
     #saveimages(imout)
 
+    imgfilenames=[]
+
     mask = gen_mask(args.maskType)
     if args.inDir is not None:
         imgfilenames = glob( args.inDir + '/*.' + args.imgExt )
@@ -112,8 +114,9 @@ def main():
     inpaint_out, g_out = m.restore_image(in_img, mask, args.blend)
     scipy.misc.imsave(os.path.join(args.outDir, 'mask.png'), mask)
 
-    saveimages(g_out, 'inpaint_gen', imgfilenames, args.outDir)
-    saveimages(inpaint_out, 'inpaint', imgfilenames, args.outDir)
+    if len(imgfilenames)>0:
+        saveimages(g_out, 'inpaint_gen', imgfilenames, args.outDir)
+        saveimages(inpaint_out, 'inpaint', imgfilenames, args.outDir)
 
 if __name__ == '__main__':
     main()

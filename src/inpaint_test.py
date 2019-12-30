@@ -96,6 +96,8 @@ def main():
     imout = m.sample()
     saveimages(imout)
 
+    imgfilenames=[]
+
     mask = gen_mask(args.maskType)
     if args.inDir is not None:
         imgfilenames = glob( args.inDir + '/*.' + args.imgExt )
